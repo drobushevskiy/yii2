@@ -18,6 +18,7 @@ class RegisterController extends Controller
 
         if ( $model->load( Yii::$app->request->post() ) ) {
             if ( $user = $model->save() ) {
+                // dd(Yii::$app->request->post());
                 Yii::$app->user->login( $user );
                 return $this->redirect(['account/index']);
             }

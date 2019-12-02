@@ -18,10 +18,16 @@
 </div>
 
 <div class="form-group row">
-    <div class="col-sm-4">
-        <?= Html::radio('user_type', true, ['onclick' => 'hideInputCompany()', 'value' => 0]) ?>
+    <div class="col-sm-2">
+        <?= Html::radio('user_type', true, ['onclick' => 'hideInputCompanyAndTin()', 'value' => 0]) ?>
         <?= Html::label('Физ. лицо') ?>
-        <?= Html::radio('user_type', false, ['onclick' => 'showInputCompany()', 'value' => 1]) ?>
+    </div>
+    <div class="col-sm-2">
+        <?= Html::radio('user_type', false, ['onclick' => 'showInputTin()', 'value' => 1]) ?>
+        <?= Html::label('ИП') ?>
+    </div>
+    <div class="col-sm-2">
+        <?= Html::radio('user_type', false, ['onclick' => 'showInputCompanyAndTin()', 'value' => 2]) ?>
         <?= Html::label('Юр. лицо') ?>
     </div>
 </div>
@@ -50,7 +56,7 @@
     </div>
 </div>
 
-<div class="form-group row">
+<div id="divTin" class="form-group row" style="display:none">
     <div class="col-sm-4">
         <?= $form->field($model, 'tin')->textInput()->label('ИНН') ?>
     </div>

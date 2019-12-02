@@ -46,13 +46,13 @@ class RegisterForm extends Model
             ['tin', 'number'],
             ['company_name', 'string', 'max' => 100],
 
-            [
-                ['tin'],
-                'required',
-                'when' => function ($model) {
-                    return $model->user_type == 1;
-                },
-            ],
+            // [
+            //     ['tin'],
+            //     'required',
+            //     'when' => function ($model) {
+            //         return $model->user_type == 1;
+            //     },
+            // ],
 
         ];
     }
