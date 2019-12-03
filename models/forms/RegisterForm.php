@@ -12,7 +12,7 @@ class RegisterForm extends Model
     public $tin;
     public $company_name;
     public $password, $password_repeat;
-    public $user_type;
+    public $user_type = 0;
 
     public function attributeLabels() {
         return [
@@ -24,6 +24,7 @@ class RegisterForm extends Model
             'company_name'    => 'Название компании',
             'password'        => 'Пароль',
             'password_repeat' => 'Подтверждение пароля',
+            'user_type'       => 'Тип пользователя',
         ];
     }
 
@@ -44,16 +45,35 @@ class RegisterForm extends Model
 
             ['tin', 'string', 'max' => 20],
             ['tin', 'number'],
+            [['tin'], 'required',
+                'when' => function ($model) {
+                    return $model->user_type == '1';
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('input[name=\'RegisterForm[user_type]\']:checked', '#register-form').val() == 1;
+                }"
+            ],
+            [['tin'], 'required',
+                'when' => function ($model) {
+                    return $model->user_type == '2';
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('input[name=\'RegisterForm[user_type]\']:checked', '#register-form').val() == 2;
+                }"
+            ],
+
             ['company_name', 'string', 'max' => 100],
+            [['company_name'],
+                'required',
+                'when' => function ($model) {
+                    return $model->user_type == '2';
+                },
+                'whenClient' => "function (attribute, value) {
+                    return $('input[name=\'RegisterForm[user_type]\']:checked', '#register-form').val() == 2;
+                }"
+            ],
 
-            // [
-            //     ['tin'],
-            //     'required',
-            //     'when' => function ($model) {
-            //         return $model->user_type == 1;
-            //     },
-            // ],
-
+            ['user_type', 'safe']
         ];
     }
 

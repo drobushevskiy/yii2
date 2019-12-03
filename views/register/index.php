@@ -18,18 +18,10 @@
 </div>
 
 <div class="form-group row">
-    <div class="col-sm-2">
-        <?= Html::radio('user_type', true, ['onclick' => 'hideInputCompanyAndTin()', 'value' => 0]) ?>
-        <?= Html::label('Физ. лицо') ?>
-    </div>
-    <div class="col-sm-2">
-        <?= Html::radio('user_type', false, ['onclick' => 'showInputTin()', 'value' => 1]) ?>
-        <?= Html::label('ИП') ?>
-    </div>
-    <div class="col-sm-2">
-        <?= Html::radio('user_type', false, ['onclick' => 'showInputCompanyAndTin()', 'value' => 2]) ?>
-        <?= Html::label('Юр. лицо') ?>
-    </div>
+    <?= $form->field($model, 'user_type')->radioList(
+            ['0' => 'Физ. лицо', '1' => 'ИП', '2' => 'Юр. лицо']
+        )->label(false);
+    ?>
 </div>
 
 <div class="form-group row">
@@ -56,13 +48,13 @@
     </div>
 </div>
 
-<div id="divTin" class="form-group row" style="display:none">
+<div class="form-group row">
     <div class="col-sm-4">
         <?= $form->field($model, 'tin')->textInput()->label('ИНН') ?>
     </div>
 </div>
 
-<div id="divCompany" class="form-group row" style="display:none">
+<div class="form-group row">
     <div class="col-sm-4">
         <?= $form->field($model, 'company_name')->textInput()->label('Название компании') ?>
     </div>
